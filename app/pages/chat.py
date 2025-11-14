@@ -87,7 +87,7 @@ def chat_page() -> rx.Component:
                         rx.el.button(
                             rx.icon("send", class_name="h-5 w-5"),
                             type="submit",
-                            class_name="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700",
+                            class_name="bg-emerald-600 text-white p-2 rounded-lg hover:bg-emerald-700",
                         ),
                         class_name="flex items-center gap-2 p-1 bg-gray-800/80 rounded-b-lg",
                     ),
