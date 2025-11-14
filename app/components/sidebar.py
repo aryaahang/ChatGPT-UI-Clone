@@ -37,7 +37,7 @@ def sidebar() -> rx.Component:
             ),
             class_name="flex h-full max-h-screen flex-col gap-2",
         ),
-        class_name="hidden border-r border-gray-800 bg-gray-950 md:block w-64",
+        class_name="hidden border-r border-gray-800 bg-gray-950 md:block md:w-[220px] lg:w-[280px] flex-shrink-0",
     )
 
 
@@ -62,7 +62,7 @@ def page_layout(main_content: rx.Component) -> rx.Component:
                 main_content,
                 class_name="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6",
             ),
-            class_name="flex flex-col flex-1",
+            class_name="flex flex-col flex-1 min-h-screen bg-gray-900",
         ),
-        class_name="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] bg-gray-900 text-white",
+        class_name="flex w-full text-white",
     )
