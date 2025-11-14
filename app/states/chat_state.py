@@ -1,10 +1,10 @@
 import reflex as rx
 import asyncio
-from typing import TypedDict, Literal
+from typing import TypedDict
 
 
 class Message(TypedDict):
-    role: Literal["user", "assistant"]
+    role: str
     content: str
 
 
@@ -12,24 +12,18 @@ class ChatState(rx.State):
     messages: list[Message] = [
         {"role": "assistant", "content": "Hello! How can I help you today?"}
     ]
-    prompt: str = ""
 
     @rx.event
     async def handle_submit(self, form_data: dict):
-        prompt = form_data["prompt"]
-        if not prompt.strip():
+        prompt = form_data.get("prompt", "").strip()
+        if not prompt:
             return
         self.messages.append({"role": "user", "content": prompt})
         yield
-        self.prompt = ""
-        yield
-        yield ChatState.mock_response
-
-    @rx.event
-    async def mock_response(self):
+        response = f"You asked: '{prompt}'. This is a placeholder response."
         self.messages.append({"role": "assistant", "content": ""})
-        assistant_response = f"You asked: '{self.messages[-2]['content']}'. This is a placeholder response."
-        for chunk in assistant_response.split():
-            self.messages[-1]["content"] += chunk + " "
+        yield
+        for word in response.split():
+            self.messages[-1]["content"] += word + " "
             await asyncio.sleep(0.05)
             yield
